@@ -7,6 +7,9 @@ import { BotBoxComponent } from '../component/bot-box/bot-box.component';
 
 import { BotRoutingModule } from './bot-routing.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { HttpActivityService } from '../service/http-activity/http-activity.service'
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,11 @@ import { BotRoutingModule } from './bot-routing.module';
     CommonModule,
     BotRoutingModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    HttpClientModule
+  ],
+  providers: [
+    HttpActivityService
   ]
 })
 export class BotModule { }

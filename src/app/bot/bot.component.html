@@ -11,9 +11,9 @@
 
     <ion-list
       lines="none"
-      *ngIf="(chats) as chat$">
+      *ngIf="(chats | async) as chat$">
       <ion-item-group class="chats-group" *ngFor="let chat of chat$">
-        <app-bot-box [chat]="chat" [current_user_id]=1></app-bot-box>
+        <app-bot-box [chat]="chat" [current_user_id]=2></app-bot-box>
       </ion-item-group>
     </ion-list>
 
