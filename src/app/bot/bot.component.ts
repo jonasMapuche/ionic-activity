@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, NavController} from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { HttpActivityService } from '../service/http-activity/http-activity.service';
+import { HttpBotService } from '../service/http-bot/http-bot.service';
 
 @Component({
   selector: 'app-bot',
@@ -23,12 +24,14 @@ export class BotComponent  implements OnInit {
   isLoading: boolean = false;
   chats: Observable<any[]> = of(this.data);
 
-  constructor(public navCtrl: NavController, private httpActivity: HttpActivityService) {}
+  constructor(public navCtrl: NavController, private httpActivity: HttpActivityService, private httpBot: HttpBotService) {}
+
+  body: any = { message: "ola"};
 
   ngOnInit() {
-    alert("here there");
-    this.httpActivity.getAll().subscribe((index) => {console.log(index);})
-  }
+    this.httpBot.postMessage(this.body).subscribe((index) => {console.log(index);});
+    //this.httpActivity.getAll().subscribe((index) => {console.log(index);});
+  } 
 
   gotoHomePage() {
     this.navCtrl.navigateForward('home');

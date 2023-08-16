@@ -9,6 +9,7 @@ import { BotRoutingModule } from './bot-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpActivityService } from '../service/http-activity/http-activity.service'
+import { HttpBotService } from '../service/http-bot/http-bot.service';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpActivityService } from '../service/http-activity/http-activity.serv
     HttpClientModule
   ],
   providers: [
-    HttpActivityService
+    HttpActivityService,
+    HttpBotService
   ]
 })
 export class BotModule { }
