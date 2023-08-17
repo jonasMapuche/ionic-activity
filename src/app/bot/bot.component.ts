@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, NavController} from '@ionic/angular';
-import { Observable, of } from 'rxjs';
+import { Observable, concat, of } from 'rxjs';
 import { HttpActivityService } from '../service/http-activity/http-activity.service';
 import { HttpBotService } from '../service/http-bot/http-bot.service';
+import { ItemActivity } from '../model/activity';
 
 @Component({
   selector: 'app-bot',
@@ -14,11 +15,7 @@ export class BotComponent  implements OnInit {
   
   @ViewChild(IonContent) content: IonContent;
 
-  data: any[] = [
-    {id: 1, sender: 1, message: 'What do I can to you?'},
-    {id: 2, sender: 2, message: 'I want recipe in the power.'},
-    {id: 3, sender: 1, message: 'Watt = Volt * Amps'}
-  ];
+  data: any[] = [];
   
   message: string = "";
   isLoading: boolean = false;
@@ -26,16 +23,49 @@ export class BotComponent  implements OnInit {
 
   constructor(public navCtrl: NavController, private httpActivity: HttpActivityService, private httpBot: HttpBotService) {}
 
-  body: any = { message: "ola"};
+  body: any = {id: 1, sender: 1, message: 'What can I do?'};
 
   ngOnInit() {
-    this.httpBot.postMessage(this.body).subscribe((index) => {console.log(index);});
-    //this.httpActivity.getAll().subscribe((index) => {console.log(index);});
+
+    function filterByFramework(obj: any) {
+      if (obj == "watts") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function filterByName(obj: any) {
+      if (obj.activity.framework.filter(filterByFramework)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    this.httpBot.postMessage(this.body).subscribe((index) => {this.data.push(index);});
+    this.httpActivity.getFramework("power").subscribe((index) => {
+      var msg1: string = "";
+      index.filter(filterByName).map(v => v.name).forEach(msg => {
+        msg1 = msg1 + " " + msg;
+      })
+      const msg2 = {
+        id: 1,
+        sender: 1,
+        message: "power = " + msg1
+      }
+      this.data.push(msg2);
+      //console.log(msg1);    
+    });
+
+
+
   } 
 
   gotoHomePage() {
     this.navCtrl.navigateForward('home');
   }
+
   sendMessage() {
     const msg = {
       id: 3,
