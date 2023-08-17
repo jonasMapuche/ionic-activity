@@ -1,14 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { HttpActivityService } from '../service/http-activity/http-activity.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor(public navCtrl: NavController) {}
+  public exempla1: string;
+
+  ngOnInit() {
+    function filterByFramework(obj: any) {
+      if (obj == "watts") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function filterByName(obj: any) {
+      if (obj.activity.framework.filter(filterByFramework)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    this.httpActivity.getFramework("power").subscribe((index) => {
+      var msg1: string = "";
+      index.filter(filterByName).map(v => v.name).forEach(msg => {
+        msg1 = msg1 + " " + msg;
+      })
+      this.exempla1 = "power = " + msg1;
+    });
+  }
+
+  constructor(public navCtrl: NavController, private httpActivity: HttpActivityService) {}
 
   public alertSetting = [
     {

@@ -7,7 +7,7 @@ import { Artless } from '../../model/artless';
   providedIn: 'root'
 })
 export class HttpArtlessService {
-  URL: string = 'http://localhost:8889/artless';
+  URL: string = 'http://api.stomach.com.br:8889/artless';
   
   httpHeader = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

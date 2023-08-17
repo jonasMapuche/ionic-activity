@@ -1,33 +1,3 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-  color: #03d9c4;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #03d9c4;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-  color: #03d9c4;
-}
-
 ion-content {
   --background: #ffffff;
 }
@@ -50,4 +20,16 @@ ion-toolbar {
   --background: #03d9c4;
   --background-activated: #03d9c4;
   --background-hover: #03d9c4;
+}
+
+.list {
+  --background: #374955;
+  --color: #ffffff;
+  --border-color: #ffffff;
+  --border-width: 5px;
+  --border-radius: 25px;
+  --inner-padding-top: 20px;
+  font-weight: 500;
+  min-height: 20px;
+  font-size: 15px;
 }

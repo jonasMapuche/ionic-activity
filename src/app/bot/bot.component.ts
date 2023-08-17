@@ -55,7 +55,6 @@ export class BotComponent  implements OnInit {
         message: "power = " + msg1
       }
       this.data.push(msg2);
-      //console.log(msg1);    
     });
 
 

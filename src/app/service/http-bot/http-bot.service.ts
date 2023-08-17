@@ -11,7 +11,7 @@ export class Message {
 })
 
 export class HttpBotService {
-  URL: string = 'http://localhost:8885/';
+  URL: string = 'http://api.stomach.com.br:8885/';
   
   httpHeader = {
     headers: new HttpHeaders({ 'Content-Type': 'text/html' }),
