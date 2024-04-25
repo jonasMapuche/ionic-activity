@@ -8,7 +8,8 @@ import { Activity } from '../../model/activity';
 })
 export class HttpActivityService {
   URL: string = 'http://api.stomach.com.br:8889/activity';
-  
+  //URL: string = 'http://localhost:8889/activity';
+
   httpHeader = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

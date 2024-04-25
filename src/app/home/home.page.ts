@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpActivityService } from '../service/http-activity/http-activity.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,35 +9,57 @@ import { HttpActivityService } from '../service/http-activity/http-activity.serv
 })
 export class HomePage implements OnInit {
 
-  public exempla1: string;
+  public data: any[] = [];
+
+  public newdata: any[] = [];
+  
+  constructor(
+    public navCtrl: NavController,
+    private httpActivity: HttpActivityService) {}
 
   ngOnInit() {
+
+    /*
     function filterByFramework(obj: any) {
-      if (obj == "watts") {
+      if (obj == "speed") {
         return true;
       } else {
         return false;
       }
     }
+    */
 
     function filterByName(obj: any) {
-      if (obj.activity.framework.filter(filterByFramework)) {
+      if (obj.name == "speed" || obj.name == "amperes" || obj.name == "lift coefficient") {
         return true;
       } else {
         return false;
       }
     }
+    
 
-    this.httpActivity.getFramework("power").subscribe((index) => {
-      var msg1: string = "";
-      index.filter(filterByName).map(v => v.name).forEach(msg => {
-        msg1 = msg1 + " " + msg;
-      })
-      this.exempla1 = "power = " + msg1;
+    this.httpActivity.getFramework("lift").subscribe(index => {
+      index.filter(filterByName).forEach(index2 => {
+        const obj = {
+          name: index2.name
+        };
+        this.data.push(obj);
+      });
     });
-  }
 
-  constructor(public navCtrl: NavController, private httpActivity: HttpActivityService) {}
+    this.httpActivity.getFramework("power").subscribe(index => {
+      index.filter(filterByName).forEach(index2 => {
+        const obj = {
+          name: index2.name
+        };
+        this.data.push(obj);
+      });
+    });
+
+    this.newdata.push(this.data.filter( index => (index.name=="amperes" || index.name=="speed")));
+
+  };
+
 
   public alertSetting = [
     {
@@ -50,7 +71,11 @@ export class HomePage implements OnInit {
   ];
 
   gotoBotComponent() {
-    this.navCtrl.navigateForward('bot');
-  }
+    this.navCtrl.navigateForward('bot/null');
+  };
+
+  gotoButtonBotComponent(button: string) {
+    this.navCtrl.navigateForward('bot/'+button);
+  };
 
 }

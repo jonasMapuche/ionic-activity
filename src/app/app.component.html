@@ -4,7 +4,7 @@
       <ion-content>
         <ion-list class="menu">
           <ion-list-header class="head"></ion-list-header>
-          <ion-list-header class="icon"><ion-img class="image" src="../assets/logo-snapchat.svg"></ion-img></ion-list-header>
+          <ion-list-header class="icon"><ion-icon name="logo-snapchat" size="large"></ion-icon></ion-list-header>
           <ion-list-header class="note"><ion-note class="note">Welcome to Bot Activity</ion-note></ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let item of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[item.url]" lines="none" detail="false" routerLinkActive="selected">

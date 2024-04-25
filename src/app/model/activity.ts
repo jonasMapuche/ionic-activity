@@ -1,17 +1,26 @@
-export class ItemActivity {
+export class Formula {
 
-    export: string;
-    framework: Array<string>;
-    name: Array<string>;
-    check: Boolean;
+    name: string;
+    initial: string;
     description: string;
- 
+
+}
+
+export class Equation {
+
+    initial: string;
+    prefix: string;
+    signal: string;
+    sequence: number;
+    description: string;
+
 }
 
 export class Activity {
 
-    id: string;
     name: Array<string>;
-    activity: ItemActivity;
+    date: Date;
+    formula: Formula;
+    equation: Equation;
 
 }

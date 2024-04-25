@@ -11,7 +11,7 @@ export class AppComponent {
 
   public appPages = [
     { title: 'Home', url: '/', icon: 'home' },
-    { title: 'Bot', url: '/bot', icon: 'man' }
+    { title: 'Bot', url: '/bot/null', icon: 'man' }
   ];
 
 }

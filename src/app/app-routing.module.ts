@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./setting/setting.module').then( m => m.SettingModule)
   },
   {
-    path: 'bot',
+    path: 'bot/:id',
     loadChildren: () => import('./bot/bot.module').then( m => m.BotModule)
   }
 ];
