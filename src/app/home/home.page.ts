@@ -11,35 +11,14 @@ export class HomePage implements OnInit {
 
   public data: any[] = [];
 
-  public newdata: any[] = [];
-  
   constructor(
     public navCtrl: NavController,
     private httpActivity: HttpActivityService) {}
 
   ngOnInit() {
 
-    /*
-    function filterByFramework(obj: any) {
-      if (obj == "speed") {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    */
-
-    function filterByName(obj: any) {
-      if (obj.name == "speed" || obj.name == "amperes" || obj.name == "lift coefficient") {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    
-
     this.httpActivity.getFramework("lift").subscribe(index => {
-      index.filter(filterByName).forEach(index2 => {
+      index.forEach(index2 => {
         const obj = {
           name: index2.name
         };
@@ -48,7 +27,7 @@ export class HomePage implements OnInit {
     });
 
     this.httpActivity.getFramework("power").subscribe(index => {
-      index.filter(filterByName).forEach(index2 => {
+      index.forEach(index2 => {
         const obj = {
           name: index2.name
         };
@@ -56,10 +35,7 @@ export class HomePage implements OnInit {
       });
     });
 
-    this.newdata.push(this.data.filter( index => (index.name=="amperes" || index.name=="speed")));
-
   };
-
 
   public alertSetting = [
     {
@@ -69,6 +45,10 @@ export class HomePage implements OnInit {
       }
     }
   ];
+
+  search(art: any[]) {
+    return art.filter((obj)=>(obj.name == "speed" || obj.name == "amperes" || obj.name == "lift coefficient"));
+  };
 
   gotoBotComponent() {
     this.navCtrl.navigateForward('bot/null');

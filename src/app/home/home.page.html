@@ -14,7 +14,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-item *ngFor="let chat of data" button lines="full" class="list" (click)="gotoButtonBotComponent(chat.name[0])">
+  <ion-item *ngFor="let chat of search(data)" button lines="full" class="list" (click)="gotoButtonBotComponent(chat.name[0])">
     <ion-label>{{chat.name[0]}}</ion-label>
   </ion-item>
 

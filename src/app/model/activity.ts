@@ -19,7 +19,6 @@ export class Equation {
 export class Activity {
 
     name: Array<string>;
-    date: Date;
     formula: Formula;
     equation: Equation;
 

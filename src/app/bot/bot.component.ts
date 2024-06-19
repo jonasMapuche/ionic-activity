@@ -34,22 +34,6 @@ export class BotComponent  implements OnInit {
 
     this.param = this.activatedRoute.snapshot.paramMap.get('id') as string;
 
-    function filterByFramework(obj: any) {
-      if (obj == "watts") {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
-    function filterByName(obj: any) {
-      if (obj.activity.framework.filter(filterByFramework)) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
     if (this.param=="null") {
       const body = {id: 1, sender: 1, message: 'What can I do?'};
       this.httpBot.postMessage(body).subscribe((index) => {this.data.push(index);});
@@ -71,25 +55,6 @@ export class BotComponent  implements OnInit {
           });
       });
     };
-
-    /*
-      const body = {id: 1, sender: 1, message: this.param};
-      this.httpBot.postMessage(body).subscribe((index) => {this.data.push(index);});
-    */  
-    /*
-    this.httpActivity.getFramework("power").subscribe((index) => {
-      var msg1: string = "";
-      index.filter(filterByName).map(v => v.name).forEach(msg => {
-        msg1 = msg1 + " " + msg;
-      })
-      const msg2 = {
-        id: 1,
-        sender: 1,
-        message: "power = " + msg1
-      }
-      this.data.push(msg2);
-    });
-    */
 
   }; 
 
